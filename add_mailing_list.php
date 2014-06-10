@@ -1,10 +1,6 @@
-gig-central-documentation
-=========================
 <?php
 /**
 
-* 
-* 
 * See license type: http://opensource.org/licenses/MIT
 *
 * /views/mailing_list/add_mailing_list.php is an add form to add (sic redundant) an item to the table
@@ -18,12 +14,13 @@ echo validation_errors(); //validation errors will appear here
 
 ?>
 <h1>Add to Mailing List</h1>
-<?=form_open('mailing_list/insert'); // calls this from view?>
+<?=form_open('mailing_list/insert'); // begin form; calls this from view ?>
 <?php
 	$first_name=array(
 	'name' => 'first_name',
 	'id' => 'first_name',
 	'value' => set_value('first_name',''),
+	//make sure all the array values match
 	);
 	
 	$req = 'required="required"';
@@ -85,7 +82,7 @@ echo validation_errors(); //validation errors will appear here
 	'value' => set_value('password',''),
 	);
 	echo form_label('Password', 'password') . ': ';
-	echo form_password($password) . '<br />';
+	echo form_password($password) . '<br />'; //note the use of "form_password" instead of "form_input."
 	
 	$bio=array(
 	'name' => 'bio',
@@ -94,12 +91,7 @@ echo validation_errors(); //validation errors will appear here
 	);
 	
 	echo form_label('Bio', 'bio') . ': ';
-	echo form_textarea($bio) . '<br />';//note the use of "textarea" instead of "input."
-	
-	/*$interests=array(
-	'name' => 'interests',
-	'id' => 'interests'
-	);*/
+	echo form_textarea($bio) . '<br />';//note the use of "form_textarea" instead of "form_input."
 	
 	$interests=array(
 	'backpack_cal' => 'Backpack California',
@@ -108,7 +100,7 @@ echo validation_errors(); //validation errors will appear here
 	);
 	
 	echo form_label('Interests', 'interests') . ': ';
-	echo form_multiselect('interests',$interests) . '<br />';
+	echo form_multiselect('interests',$interests) . '<br />'; 
 	
 	$num_tours1=array(
 	'name' => 'num_tours1',
@@ -131,6 +123,7 @@ echo validation_errors(); //validation errors will appear here
 	'checked' => FALSE
 	);
 	
+	//radio buttons
 	
 	echo form_label('None', 'num_tours1') . ': ';
 	echo form_radio($num_tours1) . '<br />';
@@ -140,9 +133,8 @@ echo validation_errors(); //validation errors will appear here
 	
 	echo form_label('4-6', 'num_tours3') . ': ';
 	echo form_radio($num_tours1) . '<br />';
-	
-	
+
 ?>
 
 <?=form_submit('submit','Add to mailing list');?>
-<?=form_close();?>
+<?=form_close(); //end of form ?>
