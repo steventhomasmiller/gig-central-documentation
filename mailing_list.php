@@ -2,8 +2,16 @@
 /**
 
 * 
-* mailing_list.php determines how the HTTP requests will be handled. It will be named in such a way as to be called by a URI, for our purposes, "Mailing_list."
-* See license type: http://opensource.org/licenses/MIT
+ * mailing_list.php determines how the HTTP requests will be handled. It will be named in such a way as to be called by a URI, for our purposes, "Mailing_list."
+ *
+ *
+ *
+ * @package: Mailing_List
+ * @author Steve
+ * @version 2.0 2014/06/11
+ * @link https://github.com/steventhomasmiller/gig-central-documentation  
+ * See license type: http://opensource.org/licenses/MIT
+*/
 *
 
 */
@@ -19,6 +27,8 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* index function
 	* variable $data is an array(?) with different properties we will load.
 	* we are making data available to our header and footer
+	* @todo none(?)
+	* @returns none
 	*/
 
 	public function index(){ 
@@ -38,6 +48,8 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* variable $data is an array(?) with different properties we will load.
 	* @param $id calls the page id
 	* this will show us the data from a single page
+	* @returns none
+	* @todo none(?)
 	*/
 	
 	public function view($id){ 
@@ -54,6 +66,8 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* add function
 	* variable $data is an array(?) with different properties we will load.
 	* this is a form to add a new record
+	* @returns none
+	* @todo none(?)
 	*/
 
 	public function add()
@@ -71,6 +85,8 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* insert function
 	* variable $data is an array(?) with different properties we will load (do I still need to include this?).
 	* this will insert the data entered via add()
+	* @todo none(?)
+	* @returns none
 	*/
 	
 	public function insert()
