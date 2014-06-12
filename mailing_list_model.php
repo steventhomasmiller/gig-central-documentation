@@ -2,146 +2,68 @@
 /**
 
 * 
- * mailing_list.php determines how the HTTP requests will be handled. It will be named in such a way as to be called by a URI, for our purposes, "Mailing_list."
- *
- *
- *
+* Mailing_list_model.php works directly with the database. It will be loaded within and called from the controller functions (but correct me if I'm wrong).
  * @package: Mailing_List
  * @author Steve
  * @version 2.0 2014/06/11
  * @link https://github.com/steventhomasmiller/gig-central-documentation  
  * See license type: http://opensource.org/licenses/MIT
 */
-*
 
-*/
 
-class Mailing_list extends CI_Controller { //begin class. Also, make sure to capitalize the first word.
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('Mailing_list_model'); //loads from the model; make sure it matches the class name exactly.
-	}
+class Mailing_list_model extends CI_Model //the model name MUST be capitalized.
+{//beginning of model
 	
 	/**
-	* index function
-	* variable $data is an array(?) with different properties we will load.
-	* we are making data available to our header and footer
-	* @todo none(?)
-	* @returns none
-	*/
-
-	public function index(){ 
-  
-        $data['query'] = $this->Mailing_list_model->get_mailing_list();
-        $this->config->set_item('style', 'amelia.css'); //sets the style of the page. Make sure the .css theme is supported by CI.
-		$data['title'] = "Here is the title tag.";
-        $data['banner'] = "Here is our website";
-        $data['copyright'] = "Copyright and such";
-        $this->load->view('header',$data);
-        $this->load->view('mailing_list/view_mailing_list',$data);  //calling from the view     
-        $this->load->view('footer',$data);         //current running object
-    } //end index()
-	
-	/**
-	* view function
-	* variable $data is an array(?) with different properties we will load.
-	* @param $id calls the page id
-	* this will show us the data from a single page
-	* @returns none
-	* @todo none(?)
-	*/
-	
-	public function view($id){ 
-        $data['query'] = $this->Mailing_list_model->get_id($id);        
-        $data['title'] = "Here is the title tag.";
-        $data['banner'] = $id; 
-        $data['copyright'] = "Copyright and such";    
-        $this->load->view('header',$data);
-        $this->load->view('mailing_list/view_mailing_list_detail',$data);        
-        $this->load->view('footer',$data);  //current running object
-    } //end view()
-	
-	/**
-	* add function
-	* variable $data is an array(?) with different properties we will load.
-	* this is a form to add a new record
-	* @returns none
-	* @todo none(?)
-	*/
-
-	public function add()
-	{
-		$this->load->helper('form');
-        $data['title'] = "Here is the title tag.";
-        $data['banner'] = "Add a record, NOW!";
-        $data['copyright'] = "Copyright and such";
-		$this->load->view('header',$data);
-        $this->load->view('mailing_list/add_mailing_list',$data); //calls from view
-        $this->load->view('footer',$data);         //current running object
-	} //end add()
-	
-	/**
-	* insert function
-	* variable $data is an array(?) with different properties we will load (do I still need to include this?).
-	* this will insert the data entered via add()
+	* constructor function
+	* creates active connection to DB
 	* @todo none(?)
 	* @returns none
 	*/
 	
-	public function insert()
-	{
-		$this->load->library('form_validation');
-		//must have at least one validation rule to insert
-		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
-		$this->form_validation->set_rules('first_name','First Name','trim|required');
-		$this->form_validation->set_rules('last_name','Last Name','trim|required');
-		$this->form_validation->set_rules('address','Address','trim|required');
-		$this->form_validation->set_rules('state_code','State','trim|required');
-		$this->form_validation->set_rules('zip_postal','Zip Code','trim|required');
-		$this->form_validation->set_rules('username','Username','trim|required');
-		$this->form_validation->set_rules('password','Password','trim|required');
+	public function __construct() //remember: precede a constructor with a space and two underscores
+		{
+			$this->load->database(); //loading the database
+		}	
 		
-		if($this->form_validation->run() == FALSE)
-		{//failed validation; send back to form
-			//VIEW DATA ON FAILURE GOES HERE
-			$this->load->helper('form');
-			$data['title'] = "AHHHHHHH.";
-			$data['banner'] = "Data entry error. Sorry.";
-			$data['copyright'] = "Copyright and such";
-			$this->load->view('header',$data);
-			$this->load->view('mailing_list/add_mailing_list',$data);
-			$this->load->view('footer',$data);
-
-		}else{//insert data
-			$post=array(
-				'first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'email' => $this->input->post('email'),
-				'address' => $this->input->post('address'),
-				'state_code' => $this->input->post('state_code'),
-				'zip_postal' => $this->input->post('zip_postal'),
-				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
-				'bio' => $this->input->post('bio'),
-				'interests' => $this->input->post('interests'),
-				'num_tours' => $this->input->post('num_tours'),
-			);
-			
-			$id = $this->Mailing_list_model->insert($post);
-			
-			echo 'id is: ' . $id; // as in "page id"
-			//die;
-			
-			redirect('/mailing_list/view/' . $id); //takes you to the appropriate page
-			
-		}
-	}
+	/**
+	* get mailing list function
+	* @todo none(?)
+	* @returns mailing_list from index function in the controller
+	*/
 	
-} //end class
+	public function get_mailing_list()
+		{	
+			return $this->db->get('mailing_list'); //retrieves mailing list from database
+		}	
+		
+	/**
+	* get id function
+	* @param $id is for the page identifier (or the userid; I could use some clarification on this point.)
+	* @return mailing list
+	* @todo none(?)
+	*/
+		
+	public function get_id($id)
+		{
+			$this->db->where('userid',$id);
+			return $this->db->get('mailing_list');	//retrieves mailing list from database.
+		}
 
- //classes extend complex code (wrote that during class; perhaps it's relevant here).
+	/**
+	* insert row function
+	* @param $row is for database row
+	* @todo none(?)
+	* @returns the inserted id
+	*/
+		
+	public function insert($row)
+	{
+		$this->db->insert('mailing_list',$row); //inserts the mailing list into the database (I think)
+		return $this->db->insert_id();
+	}
 
+} //end of the model
 
- 
 ?>
