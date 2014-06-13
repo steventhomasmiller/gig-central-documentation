@@ -1,12 +1,18 @@
 <?php
 /**
-
-* See license type: http://opensource.org/licenses/MIT
-*
-* /views/mailing_list/add_mailing_list.php is an add form to add (sic redundant) an item to the table
-* the controller loads this page
-* take note of its file pathing when saving
-* feel free to add anything I missed
+ * 
+ *
+ * /views/mailing_list/add_mailing_list.php is an add form to add (sic redundant) an item to the table* the controller loads this page
+ *
+ *
+ *
+ * @package Mailing_List
+ * @author Steve Miller
+ * @version 1.0 2014/06/12
+ * @link https://github.com/steventhomasmiller/
+ * @license http://opensource.org/licenses/MIT
+ * @see mailing_list_model.php
+ * @todo none
 */
 
 echo '<p></p>'; //for some space at the top
@@ -137,4 +143,4 @@ echo validation_errors(); //validation errors will appear here
 ?>
 
 <?=form_submit('submit','Add to mailing list');?>
-<?=form_close(); //end of form ?>
+<?=form_close(); ?>
