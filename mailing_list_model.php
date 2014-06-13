@@ -2,12 +2,14 @@
 /**
 
 * 
-* Mailing_list_model.php works directly with the database. It will be loaded within and called from the controller functions (but correct me if I'm wrong).
- * @package: Mailing_List
- * @author Steve
- * @version 2.0 2014/06/11
- * @link https://github.com/steventhomasmiller/gig-central-documentation  
- * See license type: http://opensource.org/licenses/MIT
+ * Mailing_list_model.php works directly with the database. It will be loaded within and called from the controller functions (but correct me if I'm wrong).
+ * @package Mailing_List
+ * @author Steve Miller
+ * @version 1.0 2014/06/12
+ * @link https://github.com/steventhomasmiller/
+ * @license http://opensource.org/licenses/MIT
+ * @see mailing_list_model.php
+ * @todo none
 */
 
 
