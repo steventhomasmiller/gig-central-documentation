@@ -6,11 +6,13 @@
  *
  *
  *
- * @package: Mailing_List
- * @author Steve
- * @version 2.0 2014/06/11
- * @link https://github.com/steventhomasmiller/gig-central-documentation  
- * See license type: http://opensource.org/licenses/MIT
+ * @package Mailing_List
+ * @author Steve Miller
+ * @version 1.0 2014/06/12
+ * @link https://github.com/steventhomasmiller/
+ * @license http://opensource.org/licenses/MIT
+ * @see mailing_list_model.php
+ * @todo none
 */
 *
 
@@ -27,8 +29,9 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* index function
 	* variable $data is an array(?) with different properties we will load.
 	* we are making data available to our header and footer
+	* @return none
+	* @param integer $id The unique ID number of the Survey (fix this)
 	* @todo none(?)
-	* @returns none
 	*/
 
 	public function index(){ 
@@ -48,7 +51,7 @@ class Mailing_list extends CI_Controller { //begin class. Also, make sure to cap
 	* variable $data is an array(?) with different properties we will load.
 	* @param $id calls the page id
 	* this will show us the data from a single page
-	* @returns none
+	* @return none
 	* @todo none(?)
 	*/
 	
